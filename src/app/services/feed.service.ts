@@ -41,7 +41,11 @@ export class FeedService {
 
 
 
-  // public deleteCommentsObservable(){
-  //   return this.http.delete(`${this.url}/deleteComments`);
-  // }
+  public deleteComments(){
+    this.http.delete(`${this.url}/deleteComments`)
+      .subscribe(data => {
+        console.log(data);
+        this.refreshFeed();
+      });
+  }
 }

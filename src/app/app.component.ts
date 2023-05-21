@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+
   public title = 'Mailchimp Real Time Comment Feed';
   public comments$ : Observable<IComment[]> = new Observable<IComment[]>();
   public newComment :string | undefined = "test";
@@ -23,9 +24,12 @@ export class AppComponent implements OnInit {
     this.comments$ = this.feedService.getCommentsObservable();
   }
 
-
+  // 
   postComment(): void {
-    console.log(this.name, this.newComment);
     this.feedService.createComment(<IComment>{ "name": this.name, "message": this.newComment});
+  }
+
+  purgeAllComments() {
+    this.feedService.deleteComments();
   }
 }
