@@ -1,6 +1,6 @@
 {
   "name": "livefeed",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "real-time comment feed with MEAN stack",
   "scripts": {
     "ng": "ng",
