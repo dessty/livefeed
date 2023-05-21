@@ -1,15 +1,14 @@
-<ul>
-  <li>steve - here is a comment</li>
-  <li>steve - here is another comment</li>
+<ul *ngFor="let comment of comments$ | async">
+  <li>{{ comment | json }}</li>
 </ul>
-
+test
 <label>
   Name:
-  <input type="text"  >
+  <input type="text"  [(ngModel)]="name" >
 </label>
 
 <label>
   Post a comment:
-  <textarea name="comment-input" id="comment-input" cols="30" rows="10" ></textarea>
+  <textarea name="comment-input" id="comment-input" cols="30" rows="10" [(ngModel)]="newComment"></textarea>
 </label>
-<button (click)="'return;'">Comment</button>
+<button (click)="postComment()">Comment</button>
