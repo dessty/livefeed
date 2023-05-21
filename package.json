@@ -1,6 +1,7 @@
 {
   "name": "livefeed",
   "version": "0.0.0",
+  "description": "real-time comment feed with MEAN stack",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -9,7 +10,9 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:ci": "jest --runInBand",
-    "release": "standard-version"
+    "release": "standard-version",
+    "server": "nodemon server",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start\""
   },
   "private": true,
   "dependencies": {
@@ -32,20 +35,31 @@
     "@commitlint/cli": "^17.6.3",
     "@commitlint/config-conventional": "^17.6.3",
     "@types/jest": "^29.5.1",
+    "body-parser": "^1.20.2",
+    "concurrently": "^8.0.1",
+    "express": "^4.18.2",
     "husky": "^8.0.3",
     "jest": "^29.5.0",
     "jest-preset-angular": "^13.1.1",
+    "nodemon": "^2.0.22",
+    "sqlite3": "^5.1.6",
     "standard-version": "^9.5.0",
     "typescript": "~5.0.2"
   },
   "jest": {
     "preset": "jest-preset-angular",
-    "setupFilesAfterEnv":[
+    "setupFilesAfterEnv": [
       "<rootDir>/src/setup.jest.ts"
     ],
     "testPathIgnorePatterns": [
       "<rootDir>/node_modules/",
       "<rootDir>/dist"
     ]
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

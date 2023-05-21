@@ -1,7 +1,7 @@
 <ul *ngFor="let comment of comments$ | async">
   <li>{{ comment | json }}</li>
 </ul>
-test
+
 <label>
   Name:
   <input type="text"  [(ngModel)]="name" >
