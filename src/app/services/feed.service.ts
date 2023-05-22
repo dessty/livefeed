@@ -7,8 +7,14 @@ import { HttpClient } from '@angular/common/http'
   providedIn: 'root'
 })
 export class FeedService {
-  private readonly api_endpoint: string = "http://localhost:3001"
 
+  /**
+ * This class is responsible for interacting with the Backend WebServer API (*:3001)
+ * We consume that API, and manage the business logic with the functions 
+ * in this file
+ */
+
+  private readonly api_endpoint: string = "http://localhost:3001"
   private readonly _comments$ = new BehaviorSubject<IComment[]>([]);
 
 
@@ -19,7 +25,8 @@ export class FeedService {
    **/
 
   public refreshFeedAPI() {
-    this.http.get<IComment[]>(`${this.api_endpoint}/getComments`) // returns an observable to which we subcribe to listen for incoming data from the api call
+    // return an observable to which we subcribe to listen for incoming data from the api call
+    this.http.get<IComment[]>(`${this.api_endpoint}/getComments`) 
       .subscribe(comments => this._comments$.next(comments));
   }
 
@@ -27,11 +34,10 @@ export class FeedService {
     this.http.post<IComment>(`${this.api_endpoint}/createComment`, data)
       .subscribe(data => {
         console.log(data);
-        // this.refreshFeed();
       })
   }
 
-  public deleteCommentsAPI(){
+  public deleteCommentsAPI() {
     this.http.delete(`${this.api_endpoint}/deleteComments`)
       .subscribe(data => {
         this.refreshFeedAPI();
@@ -45,15 +51,8 @@ export class FeedService {
   public pushCommentToCommentList(comment: IComment) {
     this._comments$.next([...this._comments$.getValue(), comment]);
   }
+
   public getCommentsObservable() {
     return this._comments$.asObservable();
   }
-
-  // public getCommentObservable(): Observable<IComment>{
-  //   return this.getAllComments().as
-  // }
-
-
-
-
 }

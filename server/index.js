@@ -66,8 +66,12 @@ app.post('/createComment', function(request, response) {
   const { body } = request;
   comment.createComment(body).then(result => {
     response.send(result);
-    console.log("==============broadcast", result);
-    console.log(body.message)
+
+    // addin the timestamp of the new comment broadcasted since it's not provided by the DB
+    body.created = new Date();
+    body.created.setHours(body.created.getHours() + 4);
+    console.log("broadcasting...", body);
+
     if (socketOpen) {
       io.emit('broadcast', body);
     }
