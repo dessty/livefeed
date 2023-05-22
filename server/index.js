@@ -69,7 +69,7 @@ app.post('/createComment', function(request, response) {
     console.log("==============broadcast", result);
     console.log(body.message)
     if (socketOpen) {
-      io.emit('broadcast', body.message);
+      io.emit('broadcast', body);
     }
 
     // res.send(`broadcast", ${result}`);

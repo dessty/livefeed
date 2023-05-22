@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Socket } from 'socket.io';
 import { io } from 'socket.io-client';
 import { DefaultEventsMap } from 'socket.io/dist/typed-events';
+import { FeedService } from './feed.service';
+import { IComment } from '../comment.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,7 @@ import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 export class SocketService {
   private readonly socket_endpoint: string = "http://localhost:4000"
   private socket: any;
-  constructor() { }
+  constructor(private feedService : FeedService) { }
 
   public connect() {
     console.log("client is connecting to the socket server on port 4000")
@@ -28,8 +30,14 @@ export class SocketService {
   }
 
   public listen(){
-    this.socket.on('broadcast', (data: string) => {
-      console.log("YALLA", data);
+    this.socket.on('broadcast', (incomingComment: IComment) => {
+      console.log("YALLA", incomingComment);
+      this.feedService.getCommentsObservable()
+          .subscribe(comments => {
+            console.log("ws displays comments: ", comments, incomingComment)
+
+          })
+      this.feedService.pushCommentToCommentList(incomingComment)
     });
   }
 

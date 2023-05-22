@@ -18,19 +18,33 @@ export class FeedService {
    * CRUD API Interfaces
    **/
 
-  public refreshFeed() {
+  public refreshFeedAPI() {
     this.http.get<IComment[]>(`${this.api_endpoint}/getComments`) // returns an observable to which we subcribe to listen for incoming data from the api call
       .subscribe(comments => this._comments$.next(comments));
   }
 
-  public createComment(data:IComment) {
+  public createCommentAPI(data:IComment) {
     this.http.post<IComment>(`${this.api_endpoint}/createComment`, data)
       .subscribe(data => {
         console.log(data);
-        this.refreshFeed();
+        // this.refreshFeed();
       })
   }
 
+  public deleteCommentsAPI(){
+    this.http.delete(`${this.api_endpoint}/deleteComments`)
+      .subscribe(data => {
+        this.refreshFeedAPI();
+      });
+  }
+
+
+  /**
+   * Manipulate our service object 
+   */
+  public pushCommentToCommentList(comment: IComment) {
+    this._comments$.next([...this._comments$.getValue(), comment]);
+  }
   public getCommentsObservable() {
     return this._comments$.asObservable();
   }
@@ -41,11 +55,5 @@ export class FeedService {
 
 
 
-  public deleteComments(){
-    this.http.delete(`${this.api_endpoint}/deleteComments`)
-      .subscribe(data => {
-        console.log(data);
-        this.refreshFeed();
-      });
-  }
+
 }

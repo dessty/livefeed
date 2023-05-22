@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
     this.socketService.init();
 
     // load comments from DB
-    this.feedService.refreshFeed();
+    this.feedService.refreshFeedAPI();
     this.comments$ = this.feedService.getCommentsObservable();
   }
 
@@ -37,10 +37,10 @@ export class AppComponent implements OnInit {
 
   // 
   postComment(): void {
-    this.feedService.createComment(<IComment>{ "name": this.name, "message": this.newComment});
+    this.feedService.createCommentAPI(<IComment>{ "name": this.name, "message": this.newComment});
   }
 
   purgeAllComments() {
-    this.feedService.deleteComments();
+    this.feedService.deleteCommentsAPI();
   }
 }
