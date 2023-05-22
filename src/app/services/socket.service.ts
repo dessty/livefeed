@@ -25,18 +25,19 @@ export class SocketService {
     }
   }
 
-  public emitComment(name: string, comment: string){
+  /**
+   * 
+   * Publish a new comment on the stream
+   */
+  public publish(name: string, comment: string){
     this.socket.emit("new comment", `${name} - ${comment}`);
   }
 
+  /**
+   * Listen for broadcasted messages from the server
+   */
   public listen(){
     this.socket.on('broadcast', (incomingComment: IComment) => {
-      console.log("YALLA", incomingComment);
-      this.feedService.getCommentsObservable()
-          .subscribe(comments => {
-            console.log("ws displays comments: ", comments, incomingComment)
-
-          })
       this.feedService.pushCommentToCommentList(incomingComment)
     });
   }
