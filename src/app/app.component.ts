@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FeedService } from './services/feed.service';
 import { IComment } from './comment.interface';
 import { Observable } from 'rxjs';
+import { SocketService } from './services/socket.service';
 
 @Component({
   selector: 'app-root',
@@ -16,12 +17,22 @@ export class AppComponent implements OnInit {
   public name: string | undefined = "test";
 
 
-  constructor(private feedService: FeedService){}
+  constructor(private feedService: FeedService,
+              private socketService: SocketService){}
 
   ngOnInit(): void {
     this.title = "Test"
+
+    // connect to the websocket and listen for incomming broadcast
+    this.socketService.init();
+
+    // load comments from DB
     this.feedService.refreshFeed();
     this.comments$ = this.feedService.getCommentsObservable();
+  }
+
+  ngOnDestroy() {
+    this.socketService.disconnect();
   }
 
   // 

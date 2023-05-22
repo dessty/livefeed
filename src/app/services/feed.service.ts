@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http'
   providedIn: 'root'
 })
 export class FeedService {
-  private readonly url: string = "http://localhost:3001"
+  private readonly api_endpoint: string = "http://localhost:3001"
 
   private readonly _comments$ = new BehaviorSubject<IComment[]>([]);
 
@@ -19,12 +19,12 @@ export class FeedService {
    **/
 
   public refreshFeed() {
-    this.http.get<IComment[]>(`${this.url}/getComments`) // returns an observable to which we subcribe to listen for incoming data from the api call
+    this.http.get<IComment[]>(`${this.api_endpoint}/getComments`) // returns an observable to which we subcribe to listen for incoming data from the api call
       .subscribe(comments => this._comments$.next(comments));
   }
 
   public createComment(data:IComment) {
-    this.http.post<IComment>(`${this.url}/createComment`, data)
+    this.http.post<IComment>(`${this.api_endpoint}/createComment`, data)
       .subscribe(data => {
         console.log(data);
         this.refreshFeed();
@@ -42,7 +42,7 @@ export class FeedService {
 
 
   public deleteComments(){
-    this.http.delete(`${this.url}/deleteComments`)
+    this.http.delete(`${this.api_endpoint}/deleteComments`)
       .subscribe(data => {
         console.log(data);
         this.refreshFeed();

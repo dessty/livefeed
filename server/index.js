@@ -7,6 +7,7 @@ const cors = require('cors'); // added cors to prevent cross origin error
 
 const app = express();
 const port = process.env.PORT || 3001;
+let socketOpen = false;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -14,6 +15,46 @@ app.use(cors({
   origin: '*'
 }));
 
+/**
+ * Websocket API configuration for streaming 
+ */
+const http = require('http').createServer(app);
+const io = require('socket.io')(http, {
+  cors: {
+    origins: ['*']
+  }
+});
+app.get('/', (req, res) => {
+  res.send('<h1>Hey Socket.io</h1>');
+});
+
+io.on('connection', (socket) => {
+  socketOpen = true;
+  console.log('a user has just connected');
+
+  //
+  socket.on('disconnect', () => {
+    socketOpen = false;
+    console.log('user disconnected');
+  });
+
+  //
+  socket.on('new comment', (msg) => {
+    io.emit('broadcast', msg);
+  });
+});
+
+
+
+http.listen(4000, () => {
+  console.log('listening on port 4000');
+});
+
+
+
+/**
+ * DB API confiugration
+ */
 const dataAccessObject = new DataAccessObject('./database.sqlite3');
 const comment = new Comment(dataAccessObject);
 
@@ -24,8 +65,15 @@ comment.createTable().catch(error => {
 app.post('/createComment', function(request, response) {
   const { body } = request;
   comment.createComment(body).then(result => {
-    console.log("/createComment -", result);
     response.send(result);
+    console.log("==============broadcast", result);
+    console.log(body.message)
+    if (socketOpen) {
+      io.emit('broadcast', body.message);
+    }
+
+    // res.send(`broadcast", ${result}`);
+    // 
   });
 });
 
@@ -39,7 +87,7 @@ app.get('/getComment', function(request, response) {
 
 app.get('/getComments', function(request, response) {
   comment.getComments().then(result => {
-    console.log("/getComments -", result);
+    // console.log("/getComments -", result);
     response.send(result);
   });
 });
