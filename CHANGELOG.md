@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/dessty/livefeed/compare/v0.2.0...v0.3.0) (2023-05-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* add style and handle basic interactions
+
+### Features
+
+* improve overall UI and UX ([7ad9b3d](https://github.com/dessty/livefeed/commit/7ad9b3d3714f7b27b883a83a7d6fa96016887676))
+* save the user's name ([b570f6f](https://github.com/dessty/livefeed/commit/b570f6f592c958001e8d988ecb722d3b7fbee3db))
+
 ## [0.2.0](https://github.com/dessty/livefeed/compare/v0.1.0...v0.2.0) (2023-05-22)
 
 
