@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/dessty/livefeed/compare/v0.1.0...v0.2.0) (2023-05-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* 2nd working prototype
+
+### Features
+
+* add ability to purgeAllComments ([ce235f9](https://github.com/dessty/livefeed/commit/ce235f971f6764142534044f9810916845f7875c))
+* cleaning socket service ([ac27d14](https://github.com/dessty/livefeed/commit/ac27d14acad6f62b6349f64fdd1512d193aeb2fb))
+* **comments:** add partial socket implementation ([36c90f5](https://github.com/dessty/livefeed/commit/36c90f534b3fdb5dbca53796a44e0b54c12d6e0b))
+* **live comments:** add live comments with no concurrency ([c65cc91](https://github.com/dessty/livefeed/commit/c65cc9137452124c8a2b0d33259645c2e5014719))
+
 ## 0.1.0 (2023-05-21)
 
 
