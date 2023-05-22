@@ -1,15 +1,34 @@
-<ul *ngFor="let comment of comments$ | async">
-  <li>{{ comment | json }}</li>
-</ul>
+<div class="page">
+  <div class="comment-header">
+    Comments ({{ (comments$ | async)?.length }})
+    <button class="btn__purge" (click)="deleteAllComments()">Delete All</button>
+  </div>
+  <!-- Display list of comments -->
+  <ul class="comment-list" >
+    <li class="comment" *ngFor="let comment of comments$ | async">
+      <div class="avatar" [ngStyle]="{'background-color': comment.name| avatar}">{{ comment.name | firstLetter | uppercase  }} </div>
+      <div class="comment__author">{{ comment.name }}</div>
+      <div class="comment__date">{{ comment.created | dateAgo}}</div>
+      <div class="comment_message">{{ comment.message }} </div>
+    </li>
+  </ul>
+  <div class="comment-form">
+      <!-- Enter your name: -->
+      <div *ngIf="!username">
+        <form #formName="ngForm" (ngSubmit)="registerUser(formName)">
+          <input type="text" placeholder="Enter your username" name="nameInput" [value]="" required autocomplete="disabled" ngModel>
+          <button>Save</button>
+        </form>
+      </div>
+      <div *ngIf="username">
+        <div class="avatar" [ngStyle]="{'background-color': username | avatar}">{{ username | firstLetter | uppercase  }}</div>
+        <div class="username">{{ username }}</div>
+      </div>
 
-<label>
-  Name:
-  <input type="text"  [(ngModel)]="name" >
-</label>
-
-<label>
-  Post a comment:
-  <textarea name="comment-input" id="comment-input" cols="30" rows="10" [(ngModel)]="newComment"></textarea>
-</label>
-<button (click)="postComment()">Comment</button>
-<button (click)="purgeAllComments()">Purge All Comments</button>
+      <!-- Post a comment: -->
+      <form class="post-comment__form" #formComment="ngForm" (ngSubmit)="postComment(formComment)">
+        <textarea name="commentInput" placeholder="Post a comment" id="comment-input" cols="30" rows="3" [(ngModel)]="newComment"></textarea>
+        <button>Post</button>
+      </form>
+  </div>
+</div>

@@ -37,18 +37,15 @@ export class AppComponent implements OnInit {
 
     // listen for a new notifications
     this.socketService.notitificationsObservable.subscribe(notifications => {
+      
+      // scroll to the new comments we were notified for
       if (notifications > 0){
-        alert("hello Moto");
         const element = document.querySelector(".comment:last-child");
         if (element){
-          console.log(element.innerHTML)
-          console.log(element.scrollHeight)
-          // scroll to the new comments we were notified for
           setTimeout(() => {
             element.parentElement?.scrollBy(0,  element.scrollHeight + 30);
           }, 100); element.scrollIntoView({ behavior: "auto", block: "end"});
           
-
           // reset unseen notifications to 0 now that the user has read over them
           this.socketService.resetNotifitications();
 
@@ -69,8 +66,10 @@ export class AppComponent implements OnInit {
 
   postComment(formData: NgForm): void {
     this.newComment = formData.value.commentInput;
-    this.feedService.createCommentAPI(<IComment>{ "name": this.username, "message": this.newComment});
-
+    if(this.newComment && this.newComment !== ""){
+      this.feedService.createCommentAPI(<IComment>{ "name": this.username, "message": this.newComment});
+      formData.reset();
+    }
   }
 
   deleteAllComments() {
