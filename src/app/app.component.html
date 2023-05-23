@@ -15,9 +15,12 @@
   <div class="comment-form">
       <!-- Enter your name: -->
       <div *ngIf="!username">
-        <form #formName="ngForm" (ngSubmit)="registerUser(formName)">
-          <input type="text" placeholder="Enter your username" name="nameInput" [value]="" required autocomplete="disabled" ngModel>
-          <button>Save</button>
+        <div class="message--error" [hidden]="formName.valid || formName.pristine">
+          <div *ngIf="formName.errors?.['minlength'] < 4">Name must be at least 4 characters long.</div>
+        </div>
+        <form class="save-name__form" #formName="ngForm" (ngSubmit)="registerUser(formName)">
+          <input type="text" placeholder="Enter your username" name="nameInput" [value]="" minlength="4" required autocomplete="disabled"  ngModel>
+          <button [disabled]="!formName.valid">Save</button>
         </form>
       </div>
       <div *ngIf="username">
@@ -27,8 +30,8 @@
 
       <!-- Post a comment: -->
       <form class="post-comment__form" #formComment="ngForm" (ngSubmit)="postComment(formComment)">
-        <textarea name="commentInput" placeholder="Post a comment" id="comment-input" cols="30" rows="3" [(ngModel)]="newComment"></textarea>
-        <button>Post</button>
+        <textarea [disabled]="!username" name="commentInput" placeholder="Post a comment" id="comment-input" cols="30" rows="3" [(ngModel)]="newComment"></textarea>
+        <button [disabled]="!username">Post</button>
       </form>
   </div>
 </div>

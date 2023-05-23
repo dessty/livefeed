@@ -122,6 +122,26 @@ comment-form
 
 }
 
+.save-name__form {
+    display: flex;
+    justify-content: "flex-end";
+    align-items: "flex-start";
+    gap: 1rem;
+}
+
+.save-name__form button {
+    background-color: #252107;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 1rem;
+    font-weight: 600;
+    padding: .75rem 4.5rem;
+}
+
+.save-name__form button:disabled {
+    background-color: rgba(58, 58, 55, 20%);
+}
+
 .comment-form .post-comment__form {
     background-color: #FFFFFF;
     border-radius: 1rem;;
@@ -143,9 +163,15 @@ comment-form
 }
 
 .post-comment__form button:hover {
-    background-color: #67CF87;
+    background-color: rgb(103, 207, 135);
     cursor: pointer;
 }
+
+.post-comment__form button:disabled{
+    background-color: rgba(103, 207, 135, 30%);
+}
+
+/*  */
 
 
 .btn__purge {
@@ -161,5 +187,11 @@ comment-form
 
 .username {
     line-height: 1.7rem;
+}
+
+.message--error {
+    font-size: .8rem;
+    color: red;
+    margin-bottom: .5rem;
 }
 
