@@ -1,4 +1,8 @@
+
 <div class="page">
+  <div class="logo">
+    <img src="https://www.akamai.com/site/en/images/logo/mailchimp-logo.svg" alt="Mailchimp logo">
+  </div>
   <div class="comment-header">
     Comments ({{ (comments$ | async)?.length }})
     <button class="btn__purge" (click)="deleteAllComments()">Delete All</button>
@@ -30,8 +34,8 @@
 
       <!-- Post a comment: -->
       <form class="post-comment__form" #formComment="ngForm" (ngSubmit)="postComment(formComment)">
-        <textarea [disabled]="!username" name="commentInput" placeholder="Post a comment" id="comment-input" cols="30" rows="3" [(ngModel)]="newComment"></textarea>
-        <button [disabled]="!username">Post</button>
+        <textarea [disabled]="!username" name="commentInput" placeholder="Post a comment" id="comment-input" cols="30" rows="3" required [(ngModel)]="newComment"></textarea>
+        <button disabled [disabled]="!formComment.valid">Post</button>
       </form>
   </div>
 </div>
