@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.4.0](https://github.com/dessty/livefeed/compare/v0.3.0...v0.4.0) (2023-05-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* version for demo
+
+* chore: ([b2cee42](https://github.com/dessty/livefeed/commit/b2cee42f92cc16b344bebef6f22dbc038e0aee9b))
+
 ## [0.3.0](https://github.com/dessty/livefeed/compare/v0.2.0...v0.3.0) (2023-05-22)
 
 
