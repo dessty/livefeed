@@ -34,12 +34,12 @@ export class AppComponent implements OnInit {
     // load comments from DB
     this.feedService.refreshFeedAPI();
     this.comments$ = this.feedService.getCommentsObservable();
-
+      
     // listen for a new notifications
     this.socketService.notitificationsObservable.subscribe(notifications => {
       
-      // scroll to the new comments we were notified for
       if (notifications > 0){
+        // scroll to the new comments we were notified for
         const element = document.querySelector(".comment:last-child");
         if (element){
           setTimeout(() => {
@@ -50,7 +50,6 @@ export class AppComponent implements OnInit {
           this.socketService.resetNotifitications();
 
         }
-          
       }
     })
   }

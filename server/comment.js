@@ -18,6 +18,13 @@ class Comment {
     return this.dataAccessObject.run(sql);
   }
 
+  deleteComment(id) {
+    return this.dataAccessObject.get(
+      'DELETE FROM comments WHERE id = ?',
+      [id]
+    );
+  }
+
   createComment({ name, message }) {
     return this.dataAccessObject.run(
       'INSERT INTO comments (name, message) VALUES (?, ?)',

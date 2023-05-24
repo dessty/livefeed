@@ -1,18 +1,22 @@
 
 <div class="page">
   <div class="logo">
-    <img src="https://www.akamai.com/site/en/images/logo/mailchimp-logo.svg" alt="Mailchimp logo">
+    <img src="https://logos-world.net/wp-content/uploads/2021/02/Mailchimp-Logo.png" alt="Mailchimp logo">
+  </div>
+  <!-- Post -->
+  <div class="post">
+    <img class="cover" src="https://cdn.nba.com/manage/2023/05/Full-Game-Highlights-Recap-YT-Thumbnail-Playoffs-2023-GSW-LAL-2-1.jpg" width="300"  alt="Mailchimp logo">
   </div>
   <div class="comment-header">
     Comments ({{ (comments$ | async)?.length }})
     <button class="btn__purge" (click)="deleteAllComments()">Delete All</button>
   </div>
   <!-- Display list of comments -->
-  <ul class="comment-list" >
+  <ul data-cy="comment-list__ul" class="comment-list" >
     <li class="comment" *ngFor="let comment of comments$ | async">
       <div class="avatar" [ngStyle]="{'background-color': comment.name| avatar}">{{ comment.name | firstLetter | uppercase  }} </div>
       <div class="comment__author">{{ comment.name }}</div>
-      <div class="comment__date">{{ comment.created | dateAgo}}</div>
+      <div class="comment__date" [title]="comment.created | date: 'EEEE, MMMM d, y, h:mm:ss a'">{{ comment.created | dateAgo}}</div>
       <div class="comment_message">{{ comment.message }} </div>
     </li>
   </ul>
@@ -23,8 +27,8 @@
           <div *ngIf="formName.errors?.['minlength'] < 4">Name must be at least 4 characters long.</div>
         </div>
         <form class="save-name__form" #formName="ngForm" (ngSubmit)="registerUser(formName)">
-          <input type="text" placeholder="Enter your username" name="nameInput" [value]="" minlength="4" required autocomplete="disabled"  ngModel>
-          <button [disabled]="!formName.valid">Save</button>
+          <input data-cy="name__input" type="text" placeholder="Enter your username" name="nameInput" [value]="" minlength="4" required autocomplete="disabled"  ngModel>
+          <button data-cy="name__submit-btn" [disabled]="!formName.valid">Save</button>
         </form>
       </div>
       <div *ngIf="username">
@@ -34,8 +38,8 @@
 
       <!-- Post a comment: -->
       <form class="post-comment__form" #formComment="ngForm" (ngSubmit)="postComment(formComment)">
-        <textarea [disabled]="!username" name="commentInput" placeholder="Post a comment" id="comment-input" cols="30" rows="3" required [(ngModel)]="newComment"></textarea>
-        <button disabled [disabled]="!formComment.valid">Post</button>
+        <textarea data-cy="comment__input" [disabled]="!username" name="commentInput" placeholder="Post a comment" id="comment-input" cols="30" rows="3" required [(ngModel)]="newComment"></textarea>
+        <button data-cy="comment__submit-btn" disabled [disabled]="!formComment.valid">Post</button>
       </form>
   </div>
 </div>

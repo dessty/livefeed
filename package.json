@@ -9,6 +9,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "jest",
     "test:watch": "jest --watch",
+    "e2e": "npx cypress open",
+    "e2e:run": "npx cypress run --headed",
     "test:ci": "jest --runInBand",
     "release": "standard-version",
     "server": "nodemon server",
