@@ -39,6 +39,8 @@ export class AppComponent implements OnInit {
     this.socketService.notitificationsObservable.subscribe(notifications => {
       
       if (notifications > 0){
+        // popup notification
+        this.XshowNotification()
         // scroll to the new comments we were notified for
         const element = document.querySelector(".comment:last-child");
         if (element){
@@ -79,5 +81,24 @@ export class AppComponent implements OnInit {
     this.username = formData.value.nameInput;
     if (this.username && this.username !== "")
       this.cookieService.set("cf-username", this.username)
+  }
+
+  XshowNotification(){
+    const element = document.getElementById("notification")
+    if (element) {
+      element.style.display = "block";
+      element.textContent = `New notification!`;
+      // hide
+      window.setTimeout(function(){
+        element.style.display = "none";
+      },5000)
+    }
+  }
+
+  XhideNotification() {
+    const element = document.getElementById("notification")
+    if (element) {
+      element.style.display = "none";
+    }
   }
 }
