@@ -7,6 +7,14 @@ This application is a comment feed that displays all comments and notifies a use
 
 The application was built with Angular 16 for the frontend interface, Node/Express for the Backend Api, and Socket.io for Streaming/Websocket protocol
 
+## Versioning
+You can pull a particular version tag to see the state of the implementation at a given time
+v0.5.0 `notification feature`
+v0.4.0 `Testing integration`
+v0.3.0 `UI style`
+v0.2.0 `streaming mechanism prototype`
+v0.1.0 `Polling mechanism prototype`
+
 
 ## Startup instruction
 ```sh
