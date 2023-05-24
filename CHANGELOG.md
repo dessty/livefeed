@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.1](https://github.com/dessty/livefeed/compare/v0.4.0...v0.4.1) (2023-05-24)
+
+
+### Features
+
+* **notifications:** add notification popup when a new message is received ([16ea7ee](https://github.com/dessty/livefeed/commit/16ea7ee2435d4c0d07381d7ef2bd0998070bbd73))
+* responsiveness ([61af6a4](https://github.com/dessty/livefeed/commit/61af6a4eb35fb60686433a8408a136c7197ab333))
+
 ## [0.4.0](https://github.com/dessty/livefeed/compare/v0.3.0...v0.4.0) (2023-05-23)
 
 
