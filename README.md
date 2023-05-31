@@ -7,6 +7,8 @@ This application is a comment feed that displays all comments and notifies a use
 
 The application was built with Angular 16 for the frontend interface, Node/Express for the Backend Api, and Socket.io for Streaming/Websocket protocol
 
+![Design](https://github.com/dessty/livefeed/blob/main/livefeed_design.jpg?raw=true)
+
 ## Versioning
 You can pull a particular version tag to see the state of the implementation at a given time
 
